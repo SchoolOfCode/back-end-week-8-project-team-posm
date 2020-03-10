@@ -6,7 +6,7 @@ const {
   loginUser,
   deleteUser,
   registerPerson,
-  registerContracts, 
+  registerContracts,
   getProviderById
 } = require("../models/index");
 
@@ -31,11 +31,11 @@ router.post("/", async (req, res) => {
   });
 });
 
-router.get("/provider/:providerId", async (req, res)=> {
-  const {providerId} = req.params;
-  const data = await getProviderById(providerId);
-  res.json(data);
-});
+// router.get("/provider/:providerId", async (req, res) => {
+//   const { providerId } = req.params;
+//   const data = await getProviderById(providerId);
+//   res.json(data);
+// });
 
 // 2. Users
 router.post("/users", async (req, res) => {
@@ -53,13 +53,11 @@ router.post("/users", async (req, res) => {
   });
 });
 
-router.get("/", async (req, res)=> {
-  const {} = req.params;
-  const = await ();
-  res.json();
-});
-
-//login
+// router.get("/", async (req, res)=> {
+//   const {} = req.params;
+//   const = await ();
+//   res.json();
+// });
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -68,6 +66,9 @@ router.post("/login", async (req, res) => {
     password: password
   });
   if (success) {
+    req.session.data = {
+      isLoggedIn: true
+    };
     return res.json({
       success: true,
       message: `${email} is logged in`
@@ -92,11 +93,7 @@ router.post("/person", async (req, res) => {
   });
 });
 
-module.exports = router;
-
-// make routes to each table
-
-// 3. contracts
+// 4. contracts
 router.post("/contracts", async (req, res) => {
   const { body } = req;
   const result = await registerContracts(body);
@@ -111,26 +108,6 @@ router.post("/contracts", async (req, res) => {
     message: "failed to register contract, please try again"
   });
 });
-// POST route to populate contracts table
-// DELETE route
-// GET route
-
-// 4. users
-// POST route to populate users table
-router.post("/", async (req, res) => {
-  const { body } = req;
-  const result = await registerUser(body);
-  if (result) {
-    return res.json({
-      success: true,
-      message: "You have registered a new user"
-    });
-  }
-  res.json({
-    success: false,
-    message: "failed to register user, please try again"
-  });
-});
 
 // DELETE route
 router.delete("/users/:id", async (req, res) => {
@@ -141,4 +118,4 @@ router.delete("/users/:id", async (req, res) => {
   }
 });
 
-// GET route
+module.exports = router;
