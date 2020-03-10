@@ -6,6 +6,7 @@ async function createProvider() {
     `CREATE TABLE IF NOT EXISTS providers (
          provider_id SERIAL PRIMARY KEY,
          provider_name TEXT,
+         UKPRN TEXT,
          sort_code TEXT,
          account_number TEXT,
          main_contact TEXT,
