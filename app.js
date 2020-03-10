@@ -1,6 +1,7 @@
 var express = require("express");
 var path = require("path");
 const logger = require("morgan");
+//const pgSession = require()
 
 const indexRouter = require("./routes/index");
 
@@ -17,4 +18,3 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 
 module.exports = app;
-​
