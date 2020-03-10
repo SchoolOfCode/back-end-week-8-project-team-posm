@@ -3,6 +3,8 @@ var path = require("path");
 const logger = require("morgan");
 //const pgSession = require()
 
+const PORT = 3000;
+
 const indexRouter = require("./routes/index");
 
 const app = express();
@@ -16,5 +18,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
+
+app.listen(PORT, () => {
+  console.log(`listening on port ${PORT}`);
+});
 
 module.exports = app;
