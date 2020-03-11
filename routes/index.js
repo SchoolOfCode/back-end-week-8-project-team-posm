@@ -8,7 +8,9 @@ const {
   deleteUser,
   registerPerson,
   registerContracts,
-  searchProviderByName
+  searchProviderByName,
+  searchPersonByLastName,
+  searchContractsById
 } = require("../models/index");
 
 /* GET home page. */
@@ -94,6 +96,12 @@ router.post("/person", async (req, res) => {
   });
 });
 
+router.get("/persons", async (req, res) => {
+  const { search } = req.query;
+  const data = await searchPersonByLastName(search);
+  res.json(data);
+});
+
 // 4. contracts
 router.post("/contracts", async (req, res) => {
   const { body } = req;
@@ -108,6 +116,12 @@ router.post("/contracts", async (req, res) => {
     success: false,
     message: "failed to register contract, please try again"
   });
+});
+
+router.get("/contracts", async (req, res) => {
+  const { search } = req.query;
+  const data = await searchContractsById(search);
+  res.json(data);
 });
 
 // DELETE route
