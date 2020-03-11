@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { query } = require("../db/index");
 const {
   registerProvider,
   registerUser,
@@ -7,7 +8,7 @@ const {
   deleteUser,
   registerPerson,
   registerContracts,
-  getProviderById
+  searchProviderByName
 } = require("../models/index");
 
 /* GET home page. */
@@ -16,7 +17,7 @@ router.get("/", function(req, res, next) {
 });
 
 // 1. Provider
-router.post("/", async (req, res) => {
+router.post("/providers", async (req, res) => {
   const { body } = req;
   const result = await registerProvider(body);
   if (result) {
@@ -31,11 +32,11 @@ router.post("/", async (req, res) => {
   });
 });
 
-// router.get("/provider/:providerId", async (req, res) => {
-//   const { providerId } = req.params;
-//   const data = await getProviderById(providerId);
-//   res.json(data);
-// });
+router.get("/providers", async (req, res) => {
+  const { search } = req.query;
+  const data = await searchProviderByName(search);
+  res.json(data);
+});
 
 // 2. Users
 router.post("/users", async (req, res) => {
