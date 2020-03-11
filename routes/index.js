@@ -11,9 +11,10 @@ const {
   searchProviderByName,
   searchPersonByLastName,
   searchContractsById,
-  putPerson,
+  updatePerson,
   deleteProvider,
-  getProvider
+  getProvider,
+  updateProvider
 } = require("../models/index");
 
 /* GET home page. */
@@ -21,7 +22,7 @@ router.get("/", function(req, res, next) {
   res.json({ message: "Index Route" });
 });
 
-// 1. Provider
+// 1. Providers to WMCA
 router.post("/providers", async (req, res) => {
   const { body } = req;
   const result = await registerProvider(body);
@@ -60,7 +61,7 @@ router.delete("/providers/:id", async (req, res) => {
   }
 });
 
-// 2. Users
+// 2. Users & Login from WMCA
 router.post("/users", async (req, res) => {
   const { body } = req;
   const result = await registerUser(body);
@@ -100,7 +101,7 @@ router.post("/login", async (req, res) => {
   return res.json({ success: false, message: `no log in` });
 });
 
-// DELETE route
+// DELETE users route - doesn't work!
 router.delete("/users/:id", async (req, res) => {
   const { body } = req.params;
   const result = await deleteUser(body);
@@ -109,7 +110,7 @@ router.delete("/users/:id", async (req, res) => {
   }
 });
 
-// 3. Person
+// 3. Person or Key Contact at Provider
 router.post("/persons", async (req, res) => {
   const { body } = req;
   const result = await registerPerson(body);
@@ -131,10 +132,11 @@ router.get("/persons", async (req, res) => {
   res.json(data);
 });
 
+//Needs work!!
 router.put("/persons", async (req, res) => {
-  const { body } = req.params;
-  const { person_id } = req;
-  const data = await putPerson(person_id);
+  const { body } = req;
+  const { person_id } = req.query;
+  const data = await updatePerson(body);
   res.json({ message: `you have updated ${person_id}` });
 });
 
