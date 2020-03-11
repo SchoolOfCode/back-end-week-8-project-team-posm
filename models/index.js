@@ -54,16 +54,51 @@ async function registerPerson({
     [firstName, lastName, phoneNumber, email, jobTitle, companyId]
   );
   return data.rows[0].person;
-
-  async function searchPersonByCompanyID(search) {
-    const data = await query(
-      `
-      SELECT * FROM person WHERE person_company_id ILIKE '%' || $1 || '%'`,
-      [search]
-    );
-    return data.rows;
-  }
 }
+async function searchPersonByLastName(search) {
+  const data = await query(
+    `
+      SELECT * FROM person WHERE last_name ILIKE '%' || $1 || '%'`,
+    [search]
+  );
+  return data.rows;
+}
+
+//PUT request required incase key contact leaves.
+
+async function putPerson(body) {
+  const {
+    person_id,
+    first_name,
+    last_name,
+    phone_number,
+    email,
+    job_title,
+    company_id
+  } = body;
+  const data = await query(
+    `UPDATE person
+  SET
+  person_id = COALESCE ($1, person_id),
+  first_name = COALESCE ($2, first_name),
+  last_name = COALESCE ($3, last_name),
+  phone_number = COALESCE ($4, phone_number),
+  email = COALESCE ($5, email),
+  job_title ($6, job_title),
+  company_id ($7, company_id)`,
+    [
+      person_id,
+      first_name,
+      last_name,
+      phone_number,
+      email,
+      job_title,
+      company_id
+    ]
+  );
+  return data.rows[0];
+}
+
 //Contract
 async function registerContracts({
   startDate,
@@ -101,6 +136,15 @@ async function registerContracts({
   return data.rows[0].person;
 }
 
+async function searchContractsById(search) {
+  const data = await query(
+    `
+      SELECT * FROM contracts WHERE contract_id = $1`,
+    [search]
+  );
+  return data.rows[0];
+}
+
 //User
 
 async function registerUser({ email, password }) {
@@ -111,7 +155,6 @@ async function registerUser({ email, password }) {
         password) VALUES ($1, $2) RETURNING email`,
     [email, hash]
   );
-
   return data.rows[0].email;
 }
 
@@ -142,7 +185,10 @@ module.exports = {
   deleteUser,
   registerPerson,
   registerContracts,
-  searchProviderByName
+  searchProviderByName,
+  searchPersonByLastName,
+  searchContractsById,
+  putPerson
 };
 
 // STEP 1 - CREATE FUNCTIONS TO POPULATE EACH INDIVIDUAL TABLE
