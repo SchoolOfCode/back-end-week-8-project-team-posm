@@ -15,6 +15,7 @@ const {
   deleteProvider,
   getProvider
 } = require("../models/index");
+const sendEmail = require("./index");
 
 /* GET home page. */
 router.get("/", function(req, res, next) {
@@ -37,10 +38,10 @@ router.post("/providers", async (req, res) => {
   });
 });
 
-// router.get("/providers", async (req, res) => {
-//   const provider = await getProvider();
-//   res.json(provider);
-// });
+router.get("/providers", async (req, res) => {
+  const provider = await getProvider();
+  res.json(provider);
+});
 
 router.get("/providers", async (req, res) => {
   const { search } = req.query;
@@ -143,6 +144,7 @@ router.post("/contracts", async (req, res) => {
   const { body } = req;
   const result = await registerContracts(body);
   if (result) {
+    sendEmail(email);
     return res.json({
       success: true,
       message: "Contract has been registered"
