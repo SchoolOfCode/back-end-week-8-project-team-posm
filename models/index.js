@@ -60,6 +60,14 @@ async function registerPerson({
   jobTitle,
   companyId
 }) {
+  console.log({
+    firstName,
+    lastName,
+    phoneNumber,
+    email,
+    jobTitle,
+    companyId
+  });
   const data = await query(
     `INSERT INTO person
         (first_name,
@@ -70,7 +78,7 @@ async function registerPerson({
         company_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING first_name`,
     [firstName, lastName, phoneNumber, email, jobTitle, companyId]
   );
-  return data.rows[0].person;
+  return data.rowCount > 0 ? data.rows[0] : null;
 }
 async function searchPersonByLastName(search) {
   const data = await query(
@@ -102,7 +110,8 @@ async function updatePerson(body) {
      phone_number = COALESCE ($4, phone_number),
      email = COALESCE ($5, email),
      job_title ($6, job_title),
-     company_id ($7, company_id)`,
+     company_id ($7, company_id)
+     WHERE `,
     [person_id, firstName, lastName, phoneNumber, email, jobTitle, companyId]
   );
   return data;

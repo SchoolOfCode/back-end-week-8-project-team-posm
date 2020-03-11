@@ -114,6 +114,7 @@ router.delete("/users/:id", async (req, res) => {
 router.post("/persons", async (req, res) => {
   const { body } = req;
   const result = await registerPerson(body);
+  console.log(result);
   if (result) {
     return res.json({
       success: true,
@@ -125,7 +126,6 @@ router.post("/persons", async (req, res) => {
     message: "failed to register a Key Contact, please try again"
   });
 });
-
 router.get("/persons", async (req, res) => {
   const { search } = req.query;
   const data = await searchPersonByLastName(search);
