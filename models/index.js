@@ -27,7 +27,7 @@ async function registerProvider({
 
 async function getProvider() {
   const data = await query(`SELECT * FROM providers`);
-  return data.rows;
+  return data.rows[0];
 }
 
 async function searchProviderByName(search) {
