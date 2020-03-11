@@ -25,6 +25,11 @@ async function registerProvider({
   return data.rows[0].providerName;
 }
 
+async function getProvider() {
+  const data = await query(`SELECT * FROM providers`);
+  return data.rows;
+}
+
 async function searchProviderByName(search) {
   const data = await query(
     `
@@ -32,6 +37,18 @@ async function searchProviderByName(search) {
     [search]
   );
   return data.rows;
+}
+
+async function deleteProvider(id) {
+  const res = await query(
+    `DELETE from providers WHERE id=$1 RETURNING provider_name`,
+    [id]
+  );
+  if (res.rowCount) {
+    return res.rows[0].providerName;
+  } else {
+    return undefined;
+  }
 }
 
 //Person
@@ -66,38 +83,30 @@ async function searchPersonByLastName(search) {
 
 //PUT request required incase key contact leaves.
 
-async function putPerson(body) {
-  const {
-    person_id,
-    first_name,
-    last_name,
-    phone_number,
-    email,
-    job_title,
-    company_id
-  } = body;
-  const data = await query(
-    `UPDATE person
-  SET
-  person_id = COALESCE ($1, person_id),
-  first_name = COALESCE ($2, first_name),
-  last_name = COALESCE ($3, last_name),
-  phone_number = COALESCE ($4, phone_number),
-  email = COALESCE ($5, email),
-  job_title ($6, job_title),
-  company_id ($7, company_id)`,
-    [
-      person_id,
-      first_name,
-      last_name,
-      phone_number,
-      email,
-      job_title,
-      company_id
-    ]
-  );
-  return data.rows[0];
-}
+// async function updatePerson(body) {
+//   const {
+//     id,
+//     firstName,
+//     lastName,
+//     phoneNumber,
+//     email,
+//     jobTitle,
+//     companyId
+//   } = body;
+//   const data = await query(
+//     `UPDATE person
+//   SET
+//   id = COALESCE ($1, id),
+//   first_name = COALESCE ($2, first_name),
+//   last_name = COALESCE ($3, last_name),
+//   phone_number = COALESCE ($4, phone_number),
+//   email = COALESCE ($5, email),
+//   job_title ($6, job_title),
+//   company_id ($7, company_id)`,
+//     [id, firstName, lastName, phoneNumber, email, jobTitle, companyId]
+//   );
+//   return data;
+// }
 
 //Contract
 async function registerContracts({
@@ -188,7 +197,8 @@ module.exports = {
   searchProviderByName,
   searchPersonByLastName,
   searchContractsById,
-  putPerson
+  deleteProvider,
+  getProvider
 };
 
 // STEP 1 - CREATE FUNCTIONS TO POPULATE EACH INDIVIDUAL TABLE
