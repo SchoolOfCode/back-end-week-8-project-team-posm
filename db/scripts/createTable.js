@@ -5,11 +5,11 @@ async function createProvider() {
   const res = await query(
     `CREATE TABLE IF NOT EXISTS providers (
          id SERIAL PRIMARY KEY,
-         provider_id TEXT,
+         provider_id INTEGER,
          provider_name TEXT,
          UKPRN TEXT,
          sort_code TEXT,
-         account_number TEXT,
+         account_number INTEGER,
          main_contact TEXT,
          contracts TEXT)`
   );
@@ -25,7 +25,7 @@ async function createPerson() {
       person_id INTEGER,
       first_name TEXT,
       last_name TEXT,
-      phone_number TEXT,
+      phone_number INTEGER,
       email TEXT,
       job_title TEXT,
       company_id INTEGER
@@ -40,12 +40,13 @@ async function createContracts() {
   const res = await query(
     `CREATE TABLE IF NOT EXISTS contracts (
       contract_id SERIAL PRIMARY KEY,
+      provider_name TEXT,
       start_date TEXT,
       end_date TEXT,
       number_of_learners INTEGER,
       skill_level TEXT,
       summary TEXT,
-      complete TEXT,
+      complete BOOLEAN,
       budget INTEGER,
       company_id INTEGER
     )`

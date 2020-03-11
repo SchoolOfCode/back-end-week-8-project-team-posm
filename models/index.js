@@ -110,6 +110,7 @@ async function searchPersonByLastName(search) {
 
 //Contract
 async function registerContracts({
+  providerName,
   startDate,
   endDate,
   numberOfLearners,
@@ -121,6 +122,7 @@ async function registerContracts({
 }) {
   const data = await query(
     `INSERT INTO contracts (
+            provider_name,
             start_date,
             end_date,
             number_of_learners,
@@ -129,8 +131,9 @@ async function registerContracts({
             complete,
             budget,
             company_id 
-          ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING start_date`,
+          ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING start_date`,
     [
+      providerName,
       startDate,
       endDate,
       numberOfLearners,
