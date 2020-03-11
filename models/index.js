@@ -176,6 +176,7 @@ async function loginUser({ email, password }) {
   // use bcrypt to compare given pasword
   const success = await bcrypt.compare(password, hash);
   // return response suc or fail
+  console.log(success);
   return success;
 }
 
