@@ -16,7 +16,7 @@ router.get("/", function(req, res, next) {
 });
 
 // 1. Provider
-router.post("/", async (req, res) => {
+router.post("/providers", async (req, res) => {
   const { body } = req;
   const result = await registerProvider(body);
   if (result) {
