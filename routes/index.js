@@ -11,7 +11,9 @@ const {
   searchProviderByName,
   searchPersonByLastName,
   searchContractsById,
-  putPerson
+  putPerson,
+  deleteProvider,
+  getProvider
 } = require("../models/index");
 
 /* GET home page. */
@@ -35,10 +37,27 @@ router.post("/providers", async (req, res) => {
   });
 });
 
+// router.get("/providers", async (req, res) => {
+//   const provider = await getProvider();
+//   res.json(provider);
+// });
+
 router.get("/providers", async (req, res) => {
   const { search } = req.query;
   const data = await searchProviderByName(search);
   res.json(data);
+});
+
+router.delete("/providers/:id", async (req, res) => {
+  const { id } = req.params;
+  const name = await deleteProvider(id);
+  if (name) {
+    res
+      .status(200)
+      .send(`You have deleted the provider ${name} with the id of ${id}`);
+  } else {
+    res.status(406).send(`There are no providers with that id to delete`);
+  }
 });
 
 // 2. Users
@@ -81,8 +100,17 @@ router.post("/login", async (req, res) => {
   return res.json({ success: false, message: `no log in` });
 });
 
+// DELETE route
+router.delete("/users/:id", async (req, res) => {
+  const { body } = req.params;
+  const result = await deleteUser(body);
+  if (result) {
+    return res.send(`You have deleted a user`);
+  }
+});
+
 // 3. Person
-router.post("/person", async (req, res) => {
+router.post("/persons", async (req, res) => {
   const { body } = req;
   const result = await registerPerson(body);
   if (result) {
@@ -103,12 +131,12 @@ router.get("/persons", async (req, res) => {
   res.json(data);
 });
 
-//router.put("/person", async (req, res) => {
-//const { body } = req.params;
-//const { person_id } = req;
-//const data = await putPerson(person_id);
-//res.json({ message: `you have updated ${person_id}` });
-//});
+router.put("/persons", async (req, res) => {
+  const { body } = req.params;
+  const { person_id } = req;
+  const data = await putPerson(person_id);
+  res.json({ message: `you have updated ${person_id}` });
+});
 
 // 4. contracts
 router.post("/contracts", async (req, res) => {
@@ -130,15 +158,6 @@ router.get("/contracts", async (req, res) => {
   const { search } = req.query;
   const data = await searchContractsById(search);
   res.json(data);
-});
-
-// DELETE route
-router.delete("/users/:id", async (req, res) => {
-  const { body } = req.params;
-  const result = await deleteUser(body);
-  if (result) {
-    return res.send(`You have deleted a user`);
-  }
 });
 
 module.exports = router;

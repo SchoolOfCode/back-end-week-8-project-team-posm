@@ -4,7 +4,8 @@ const { query } = require("../index");
 async function createProvider() {
   const res = await query(
     `CREATE TABLE IF NOT EXISTS providers (
-         provider_id SERIAL PRIMARY KEY,
+         id SERIAL PRIMARY KEY,
+         provider_id TEXT,
          provider_name TEXT,
          UKPRN TEXT,
          sort_code TEXT,
@@ -20,7 +21,8 @@ createProvider();
 async function createPerson() {
   const res = await query(
     `CREATE TABLE IF NOT EXISTS person (
-      person_id SERIAL PRIMARY KEY,
+      id SERIAL PRIMARY KEY,
+      person_id INTEGER,
       first_name TEXT,
       last_name TEXT,
       phone_number TEXT,
