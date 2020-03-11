@@ -25,13 +25,13 @@ async function registerProvider({
   return data.rows[0].providerName;
 }
 
-async function getProviderById(providerId) {
+async function searchProviderByName(search) {
   const data = await query(
     `
-    SELECT * FROM providers WHERE id = $1`,
-    [providerId]
+    SELECT * FROM providers WHERE provider_name ILIKE '%' || $1 || '%'`,
+    [search]
   );
-  return data.rows[0];
+  return data.rows;
 }
 
 //Person
@@ -53,8 +53,16 @@ async function registerPerson({
         company_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING first_name`,
     [firstName, lastName, phoneNumber, email, jobTitle, companyId]
   );
-  console.log(data);
   return data.rows[0].person;
+
+  async function searchPersonByCompanyID(search) {
+    const data = await query(
+      `
+      SELECT * FROM person WHERE person_company_id ILIKE '%' || $1 || '%'`,
+      [search]
+    );
+    return data.rows;
+  }
 }
 //Contract
 async function registerContracts({
@@ -134,7 +142,7 @@ module.exports = {
   deleteUser,
   registerPerson,
   registerContracts,
-  getProviderById
+  searchProviderByName
 };
 
 // STEP 1 - CREATE FUNCTIONS TO POPULATE EACH INDIVIDUAL TABLE
