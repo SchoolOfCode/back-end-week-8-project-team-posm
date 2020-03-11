@@ -92,15 +92,8 @@ async function searchPersonByLastName(search) {
 //PUT request required incase key contact leaves.
 
 async function updatePerson(body) {
-  const {
-    person_id,
-    firstName,
-    lastName,
-    phoneNumber,
-    email,
-    jobTitle,
-    companyId
-  } = body;
+  const { firstName, lastName, phoneNumber, email, jobTitle, companyId } = body;
+  console.log(firstName, lastName, phoneNumber, email, jobTitle, companyId);
   const data = await query(
     `UPDATE person
      SET
@@ -109,12 +102,12 @@ async function updatePerson(body) {
      last_name = COALESCE ($3, last_name),
      phone_number = COALESCE ($4, phone_number),
      email = COALESCE ($5, email),
-     job_title ($6, job_title),
-     company_id ($7, company_id)
-     WHERE `,
-    [person_id, firstName, lastName, phoneNumber, email, jobTitle, companyId]
+     job_title = COALESCE ($6, job_title),
+     company_id = COALESCE ($7, company_id)
+     WHERE person_id[0] `,
+    [firstName, lastName, phoneNumber, email, jobTitle, companyId]
   );
-  return data;
+  return data.rowCount > 0 ? data.rows[0] : null;
 }
 
 //Contract
