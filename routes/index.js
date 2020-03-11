@@ -3,7 +3,11 @@ const router = express.Router();
 const {
   registerProvider,
   registerUser,
-  loginUser
+  loginUser,
+  deleteUser,
+  registerPerson,
+  registerContracts,
+  getProviderById
 } = require("../models/index");
 
 /* GET home page. */
@@ -11,11 +15,7 @@ router.get("/", function(req, res, next) {
   res.json({ message: "Index Route" });
 });
 
-// 1. providers
-// POST route to populate table with provider data - DONE
-// DELETE route
-// GET route
-
+// 1. Provider
 router.post("/", async (req, res) => {
   const { body } = req;
   const result = await registerProvider(body);
@@ -31,6 +31,13 @@ router.post("/", async (req, res) => {
   });
 });
 
+// router.get("/provider/:providerId", async (req, res) => {
+//   const { providerId } = req.params;
+//   const data = await getProviderById(providerId);
+//   res.json(data);
+// });
+
+// 2. Users
 router.post("/users", async (req, res) => {
   const { body } = req;
   const result = await registerUser(body);
@@ -46,6 +53,12 @@ router.post("/users", async (req, res) => {
   });
 });
 
+// router.get("/", async (req, res)=> {
+//   const {} = req.params;
+//   const = await ();
+//   res.json();
+// });
+
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
   const success = await loginUser({
@@ -53,6 +66,9 @@ router.post("/login", async (req, res) => {
     password: password
   });
   if (success) {
+    req.session.data = {
+      isLoggedIn: true
+    };
     return res.json({
       success: true,
       message: `${email} is logged in`
@@ -61,37 +77,45 @@ router.post("/login", async (req, res) => {
   return res.json({ success: false, message: `no log in` });
 });
 
-module.exports = router;
-
-// make routes to each table
-
-// 2. person
-// POST route to populate persons table
-// DELETE route
-// GET route
-// PATCH
-
-// 3. contracts
-// POST route to populate contracts table
-// DELETE route
-// GET route
-
-// 4. users
-// POST route to populate users table
-router.post("/", async (req, res) => {
+// 3. Person
+router.post("/person", async (req, res) => {
   const { body } = req;
-  const result = await registerUser(body);
+  const result = await registerPerson(body);
   if (result) {
     return res.json({
       success: true,
-      message: "You have registered a new user"
+      message: "You have registered a Key Contact"
     });
   }
   res.json({
     success: false,
-    message: "failed to register user, please try again"
+    message: "failed to register a Key Contact, please try again"
+  });
+});
+
+// 4. contracts
+router.post("/contracts", async (req, res) => {
+  const { body } = req;
+  const result = await registerContracts(body);
+  if (result) {
+    return res.json({
+      success: true,
+      message: "Contract has been registered"
+    });
+  }
+  res.json({
+    success: false,
+    message: "failed to register contract, please try again"
   });
 });
 
 // DELETE route
-// GET route
+router.delete("/users/:id", async (req, res) => {
+  const { body } = req.params;
+  const result = await deleteUser(body);
+  if (result) {
+    return res.send(`You have deleted a user`);
+  }
+});
+
+module.exports = router;

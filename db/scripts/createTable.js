@@ -54,7 +54,8 @@ createContracts();
 
 // create users table to WMCA staff to login
 async function createUsers() {
-  const res = await query(`CREATE TABLE IF NOT EXISTS users ( 
+  const res = await query(`CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY, 
     email TEXT,
     password TEXT
     )`);
