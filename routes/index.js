@@ -10,7 +10,8 @@ const {
   registerContracts,
   searchProviderByName,
   searchPersonByLastName,
-  searchContractsById
+  searchContractsById,
+  putPerson
 } = require("../models/index");
 
 /* GET home page. */
@@ -101,6 +102,13 @@ router.get("/persons", async (req, res) => {
   const data = await searchPersonByLastName(search);
   res.json(data);
 });
+
+//router.put("/person", async (req, res) => {
+//const { body } = req.params;
+//const { person_id } = req;
+//const data = await putPerson(person_id);
+//res.json({ message: `you have updated ${person_id}` });
+//});
 
 // 4. contracts
 router.post("/contracts", async (req, res) => {
