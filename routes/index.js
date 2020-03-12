@@ -15,7 +15,8 @@ const {
   deleteProvider,
   getProvider,
   updateProvider,
-  getContractsByName
+  getContractsByName,
+  getAllContracts
 } = require("../models/index");
 const sendEmail = require("./index");
 
@@ -167,8 +168,14 @@ router.post("/contracts", async (req, res) => {
 
 router.get("/contracts", async (req, res) => {
   const { search } = req.query;
-  const data = await getContractsByName(search);
-  res.json(data);
+  if (search) {
+    const data = await getContractsByName(search);
+    res.json(data);
+    return;
+  } else {
+    const data = await getAllContracts();
+    res.json(data);
+  }
 });
 
 module.exports = router;

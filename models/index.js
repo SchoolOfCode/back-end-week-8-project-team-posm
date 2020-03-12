@@ -149,6 +149,12 @@ async function registerContracts({
   console.log(data);
   return data.rows[0].person;
 }
+async function getAllContracts() {
+  const data = await query(`
+  select * from contracts`);
+  console.log(data);
+  return data.rows;
+}
 
 async function searchContractsById(search) {
   const data = await query(
@@ -216,7 +222,8 @@ module.exports = {
   deleteProvider,
   getProvider,
   updatePerson,
-  getContractsByName
+  getContractsByName,
+  getAllContracts
 };
 
 // STEP 1 - CREATE FUNCTIONS TO POPULATE EACH INDIVIDUAL TABLE
