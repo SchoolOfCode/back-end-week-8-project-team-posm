@@ -14,7 +14,8 @@ const {
   updatePerson,
   deleteProvider,
   getProvider,
-  updateProvider
+  updateProvider,
+  getContractsByName
 } = require("../models/index");
 const sendEmail = require("./index");
 
@@ -158,9 +159,15 @@ router.post("/contracts", async (req, res) => {
   });
 });
 
+// router.get("/contracts", async (req, res) => {
+//   const { search } = req.query;
+//   const data = await searchContractsById(search);
+//   res.json(data);
+// });
+
 router.get("/contracts", async (req, res) => {
   const { search } = req.query;
-  const data = await searchContractsById(search);
+  const data = await getContractsByName(search);
   res.json(data);
 });
 
