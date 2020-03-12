@@ -6,7 +6,7 @@ const readFile = promisify(fs.readFile);
 async function uploadContracts() {
   try {
     const data = await readFile(
-      "/Users/bootcamp1/Documents/Projects/pokedex-MellKay/pokedex.json"
+      "/back-end-week-8-project-team-posm/contracts.json"
     );
     const contracts = JSON.parse(data);
     console.log(contracts[0]);
@@ -22,7 +22,8 @@ async function uploadContracts() {
         budget,
         companyId
       } = contracts[i];
-      const res = await query(
+
+      const res = query(
         `
   INSERT INTO contracts (
     providerName,
