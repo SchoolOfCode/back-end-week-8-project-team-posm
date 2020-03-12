@@ -1,14 +1,220 @@
 [
   {
     "contract_id": 1,
-    "provider_name": "",
+    "provider_name": "New Provider",
     "start_date": "01-01-2020",
     "end_date": "01-01-2021",
     "number_of_learners": 10,
-    "skill_level": "access",
-    "summary": "...",
+    "skill_level": "Level 1",
+    "summary": "New course",
     "complete": "no",
     "budget": "$$$",
     "company_id": "1"
+  },
+
+  {
+    "contract_id": 2,
+    "provider_name": "Birmingham Metropolitan College",
+    "start_date": "10-03-2020",
+    "end_date": "10-02-2021",
+    "number_of_learners": 16,
+    "skill_level": "Level 2",
+    "summary": "Exisiting course in Health, Public Services Care",
+    "complete": "no",
+    "budget": "$$$",
+    "company_id": "32"
+  },
+
+  {
+    "contract_id": 3,
+    "provider_name": "Birmingham Metropolitan College",
+    "start_date": "06-04-2020",
+    "end_date": "30-09-2021",
+    "number_of_learners": 22,
+    "skill_level": "Entry/Level 1",
+    "summary": "Skills development",
+    "complete": "ongoing",
+    "budget": "$$",
+    "company_id": "32"
+  },
+
+  {
+    "contract_id": 4,
+    "provider_name": "Telford College",
+    "start_date": "06-01-2020",
+    "end_date": "30-09-2022",
+    "number_of_learners": 20,
+    "skill_level": "Level 2",
+    "summary": "Engineering and Manufacturing skills development",
+    "complete": "no",
+    "budget": "$$$",
+    "company_id": "20"
+  },
+
+  {
+    "contract_id": 5,
+    "provider_name": "Vocational Skills Solutions",
+    "start_date": "01-03-2020",
+    "end_date": "10-06-2021",
+    "number_of_learners": 18,
+    "skill_level": "Level 3",
+    "summary": "ICT skills development",
+    "complete": "no",
+    "budget": "$$$",
+    "company_id": "19"
+  },
+
+  {
+    "contract_id": 6,
+    "provider_name": "Training Limited",
+    "start_date": "09-02-2020",
+    "end_date": "08-02-2021",
+    "number_of_learners": 26,
+    "skill_level": "Entry/Level 1",
+    "summary": "Digital skills development",
+    "complete": "no",
+    "budget": "$$",
+    "company_id": "15"
+  },
+
+  {
+    "contract_id": 7,
+    "provider_name": "Training Limited",
+    "start_date": "01-03-2020",
+    "end_date": "08-01-2021",
+    "number_of_learners": 10,
+    "skill_level": "Level 2",
+    "summary": "Digital skills development",
+    "complete": "no",
+    "budget": "$$$",
+    "company_id": "15"
+  },
+
+  {
+    "contract_id": 8,
+    "provider_name": "Coventry College",
+    "start_date": "01-04-2020",
+    "end_date": "31-03-2021",
+    "number_of_learners": 14,
+    "skill_level": "Level 3",
+    "summary": "Science and Maths course",
+    "complete": "no",
+    "budget": "$$",
+    "company_id": "55"
+  },
+
+  {
+    "contract_id": 9,
+    "provider_name": "Vocational Training",
+    "start_date": "01-02-2020",
+    "end_date": "30-01-2021",
+    "number_of_learners": 16,
+    "skill_level": "Level 2",
+    "summary": "Education and training course",
+    "complete": "no",
+    "budget": "$$$",
+    "company_id": "75"
+  },
+
+  {
+    "contract_id": 10,
+    "provider_name": "Training Group",
+    "start_date": "01-06-2020",
+    "end_date": "10-05-2021",
+    "number_of_learners": 24,
+    "skill_level": "Level 2",
+    "summary": "Construction, Planning and Built Environment",
+    "complete": "no",
+    "budget": "$$$",
+    "company_id": "65"
+  },
+
+  {
+    "contract_id": 11,
+    "provider_name": "Walsall College",
+    "start_date": "01-09-2020",
+    "end_date": "08-01-2021",
+    "number_of_learners": 10,
+    "skill_level": "Level 2",
+    "summary": "Retail and Commercial Enterprise course",
+    "complete": "no",
+    "budget": "$$",
+    "company_id": "17"
+  },
+
+  {
+    "contract_id": 12,
+    "provider_name": "Walsall College",
+    "start_date": "01-06-2020",
+    "end_date": "25-02-2021",
+    "number_of_learners": 10,
+    "skill_level": "Entry/Level 1",
+    "summary": "Introduction to Leisure, Travel and Tourism",
+    "complete": "no",
+    "budget": "$$$",
+    "company_id": "17"
+  },
+
+  {
+    "contract_id": 13,
+    "provider_name": "Skills Development Limited",
+    "start_date": "01-04-2020",
+    "end_date": "31-03-2021",
+    "number_of_learners": 12,
+    "skill_level": "Entry/Level 1",
+    "summary": "Digital Skills Development",
+    "complete": "no",
+    "budget": "$$$",
+    "company_id": "43"
+  },
+
+  {
+    "contract_id": 14,
+    "provider_name": "POSM Training Ltd",
+    "start_date": "01-01-2020",
+    "end_date": "18-09-2021",
+    "number_of_learners": 18,
+    "skill_level": "Level 2",
+    "summary": "Coding and Web Development",
+    "complete": "no",
+    "budget": "$$",
+    "company_id": "64"
+  },
+
+  {
+    "contract_id": 15,
+    "provider_name": "POSM Training Ltd",
+    "start_date": "01-01-2019",
+    "end_date": "12-05-2020",
+    "number_of_learners": 14,
+    "skill_level": "Entry/Level 1",
+    "summary": "Basic Web Development: HTML and CSS skills",
+    "complete": "no",
+    "budget": "$$$",
+    "company_id": "64"
+  },
+  {
+    "contract_id": 16,
+    "provider_name": "404 Training",
+    "start_date": "01-01-2019",
+    "end_date": "01-01-2020",
+    "number_of_learners": 10,
+    "skill_level": "Level 2",
+    "summary": "DIgital Skills",
+    "complete": "yes",
+    "budget": "$$",
+    "company_id": "89"
+  },
+  {
+    "contract_id": 17,
+    "provider_name": "Skills Training Are Us",
+    "start_date": "01-08-2020",
+    "end_date": "31-07-2021",
+    "number_of_learners": 14,
+    "skill_level": "Level 2",
+    "summary": "Maths and science training",
+    "complete": "no",
+    "budget": "$$",
+    "company_id": "98"
   }
 ]
