@@ -1,57 +1,58 @@
-const { query } = require("../index.js");
+const { query } = require("../index");
 const fs = require("fs");
 const { promisify } = require("util");
 const readFile = promisify(fs.readFile);
+const path = require("path");
 
-async function uploadContracts() {
+async function uploadContract() {
   try {
     const data = await readFile(
-      "/Users/bootcamp1/Documents/Projects/pokedex-MellKay/pokedex.json"
+      path.join(__dirname, "..", "..", "contracts.json")
     );
     const contracts = JSON.parse(data);
     console.log(contracts[0]);
-    for (let i = 0; i < contract.length; i++) {
+    for (let i = 0; i < contracts.length; i++) {
       const {
-        providerName,
-        startDate,
-        endDate,
-        numberOfLearners,
-        skillLevel,
+        provider_name,
+        start_date,
+        end_date,
+        number_of_learners,
+        skill_level,
         summary,
         complete,
         budget,
-        companyId
+        company_id
       } = contracts[i];
-      const res = await query(
+      const res = query(
         `
   INSERT INTO contracts (
-    providerName,
-    startDate,
-    endDate,
-    numberOfLearners,
-    skillLevel,
+    provider_name,
+    start_date,
+    end_date,
+    number_of_learners,
+    skill_level,
     summary,
     complete,
     budget,
-    companyId
+    company_id
   ) VALUES ($1,$2,$3,$4,$5,$6, $7, $8, $9)
    `,
         [
-          providerName,
-          startDate,
-          endDate,
-          numberOfLearners,
-          skillLevel,
+          provider_name,
+          start_date,
+          end_date,
+          number_of_learners,
+          skill_level,
           summary,
           complete,
           budget,
-          companyId
+          company_id
         ]
       );
-      console.log(name);
+      console.log(provider_name);
     }
   } catch (err) {
     console.log(err);
   }
 }
-uploadContracts();
+uploadContract();
