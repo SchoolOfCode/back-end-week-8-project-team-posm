@@ -46,8 +46,8 @@ async function createContracts() {
       number_of_learners INTEGER,
       skill_level TEXT,
       summary TEXT,
-      complete BOOLEAN,
-      budget INTEGER,
+      complete TEXT,
+      budget TEXT,
       company_id INTEGER
     )`
   );

@@ -23,7 +23,7 @@ async function uploadContract() {
         budget,
         company_id
       } = contracts[i];
-      const res = query(
+      const res = await query(
         `
   INSERT INTO contracts (
     provider_name,
