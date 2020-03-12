@@ -104,7 +104,7 @@ async function updatePerson(body) {
      email = COALESCE ($5, email),
      job_title = COALESCE ($6, job_title),
      company_id = COALESCE ($7, company_id)
-     WHERE person_id[0] `,
+     WHERE person_id[] `,
     [firstName, lastName, phoneNumber, email, jobTitle, companyId]
   );
   return data.rowCount > 0 ? data.rows[0] : null;
