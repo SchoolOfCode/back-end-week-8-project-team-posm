@@ -156,20 +156,20 @@ async function getAllContracts() {
   return data.rows;
 }
 
-async function searchContractsById(search) {
+async function searchContractsById(id) {
   const data = await query(
     `
       SELECT * FROM contracts WHERE contract_id = $1`,
-    [search]
+    [id]
   );
   return data.rows[0];
 }
 
-async function getContractsByName(search) {
+async function getContractsByName(name) {
   const data = await query(
     `
   SELECT * FROM contracts WHERE provider_name ILIKE '%' || $1 || '%'`,
-    [search]
+    [name]
   );
   console.log(data.rows);
   return data.rows;
