@@ -167,9 +167,14 @@ router.post("/contracts", async (req, res) => {
 // });
 
 router.get("/contracts", async (req, res) => {
-  const { search } = req.query;
-  if (search) {
-    const data = await getContractsByName(search);
+  const { name } = req.query;
+  const { id } = req.query;
+  if (name) {
+    const data = await getContractsByName(name);
+    res.json(data);
+    return;
+  } else if (id) {
+    const data = await searchContractsById(id);
     res.json(data);
     return;
   } else {
