@@ -206,7 +206,7 @@ async function deleteUser({ id }) {
   if (res.rowCount > 0) {
     const { id } = data.rows[0].id;
     return id;
-  } else return console.log("No user by that email to delete.");
+  } else return console.log("No user by that id to delete.");
 }
 
 module.exports = {
