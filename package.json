@@ -25,6 +25,6 @@
     "minimist": ">=1.2.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.22"
   }
 }
